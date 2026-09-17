@@ -110,6 +110,25 @@ tailwind.config = {
   .load-in{ opacity:0; transform:translateY(16px); animation:loadIn .9s cubic-bezier(.2,.7,.2,1) forwards; }
   @keyframes loadIn{ to{ opacity:1; transform:translateY(0);} }
 
+  /* glass effect for the mobile hero overlay */
+  .glass-panel{
+    background:rgba(12,12,13,.42);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 12px 40px -14px rgba(0,0,0,.6);
+  }
+
+  /* mobile top-bar marquee: plays right-to-left keyframes in reverse so text visibly moves left -> right */
+  .marquee-track{
+    animation:marqueeMove 16s linear infinite reverse;
+  }
+  @keyframes marqueeMove{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){ .marquee-track{ animation:none; } }
+
   /* whatsapp float */
   .wa-float{
     position:fixed; right:22px; bottom:22px; z-index:60;
@@ -158,8 +177,25 @@ tailwind.config = {
 <body class="bg-cream text-[#151412]">
 
 <!-- ============ TOP UTILITY BAR ============ -->
-<div class="w-full bg-ink text-gold-pale">
-  <div class="max-w-7xl mx-auto px-5 lg:px-12 py-2 flex items-center justify-between text-[11px] tracking-[0.14em] uppercase overflow-x-auto whitespace-nowrap gap-4">
+<div class="w-full bg-ink text-gold-pale overflow-hidden">
+  <!-- mobile: scrolling marquee so nothing gets clipped -->
+  <div class="md:hidden py-2 overflow-hidden">
+    <div class="marquee-track flex items-center w-max text-[11px] tracking-[0.14em] uppercase whitespace-nowrap">
+      <div class="flex items-center gap-10 pr-10">
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">bolt</span>Wholesale &amp; Retail — Lagos</span>
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">local_shipping</span>Nationwide Delivery · Same-Day Lagos Pickup</span>
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">call</span>+234 803 877 3989</span>
+      </div>
+      <div class="flex items-center gap-10 pr-10" aria-hidden="true">
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">bolt</span>Wholesale &amp; Retail — Lagos</span>
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">local_shipping</span>Nationwide Delivery · Same-Day Lagos Pickup</span>
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-gold" style="font-size:15px;">call</span>+234 803 877 3989</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- desktop / tablet: static bar -->
+  <div class="hidden md:flex max-w-7xl mx-auto px-5 lg:px-12 py-2 items-center justify-between text-[11px] tracking-[0.14em] uppercase whitespace-nowrap gap-4">
     <div class="flex items-center gap-2">
       <span class="material-symbols-outlined text-gold" style="font-size:15px;">bolt</span>
       <span>Wholesale &amp; Retail — Lagos</span>
@@ -225,8 +261,53 @@ tailwind.config = {
 
 <main id="top" class="w-full">
 
-<!-- ============ HERO / WELCOME ============ -->
-<section class="relative w-full overflow-hidden bg-ink text-cream">
+<!-- ============ HERO / WELCOME — MOBILE (image covers, text overlaid) ============ -->
+<section class="relative w-full lg:hidden overflow-hidden bg-ink text-cream min-h-[92vh] flex flex-col justify-end">
+  <div class="absolute inset-0">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEqFwYlqSxCUa0h0_XsI23f-j2SX1SvyIl0qUBHvqjrYVEr6jSEMkAxwfVn_gk3k19XCrj0dFcQvqXVGOyzCjknGWmvacq05nIBOQ-OYzYoe6681YzXg6tFmW-KUX6LFEVwWGtVI5R7IoAFdMKhpSY7FkUiEerK1-NN5T4UrEq8Mjt31Ke31BuF0zhQd6ngA2ykHHUd5vqL7WS9xmrG0EGLWOamLcDXactaSuBf7FYSzwjy5xbiyNbIIfEfuUQ2Ol7Fvk" alt="Signature Eagles Touch perfume flacon" class="w-full h-full object-cover"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10"></div>
+  </div>
+
+  <div class="relative z-10 px-5 pt-28 pb-8 flex flex-col gap-4">
+    <div class="load-in glass-panel rounded-2xl p-5 flex flex-col gap-3">
+      <div class="flex items-center gap-2 text-gold text-[10px] tracking-[0.2em] uppercase">
+        <span class="w-6 h-px bg-gold"></span>
+        <span>Welcome to Eagles Touch</span>
+      </div>
+      <h1 class="font-display text-[26px] leading-[1.2] font-normal">
+        Authentic fragrance, <em class="italic text-gold-light">delivered with care.</em>
+      </h1>
+      <div class="flex flex-wrap gap-3 pt-1">
+        <a href="https://wa.me/2348038773989" target="_blank" rel="noopener noreferrer"
+           class="btn-gold inline-flex items-center gap-2 px-5 py-3 rounded-full text-[11px] font-semibold tracking-[0.06em] uppercase">
+          <span class="material-symbols-outlined" style="font-size:15px;">chat</span>
+          Order on WhatsApp
+        </a>
+        <a href="#collection" class="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[11px] tracking-[0.06em] uppercase border border-cream/30 text-cream">
+          Collection
+        </a>
+      </div>
+    </div>
+
+    <div class="load-in glass-panel rounded-2xl p-4 grid grid-cols-3 gap-2 text-center" style="animation-delay:.12s;">
+      <div class="flex flex-col">
+        <span class="font-display text-2xl text-gold-light stat-num" data-target="150" data-suffix="+">0</span>
+        <span class="text-[9px] tracking-[0.1em] uppercase text-cream/55 mt-1 leading-tight">Authentic Lines</span>
+      </div>
+      <div class="flex flex-col border-x border-cream/10">
+        <span class="font-display text-2xl text-gold-light stat-num" data-target="36" data-suffix="">0</span>
+        <span class="text-[9px] tracking-[0.1em] uppercase text-cream/55 mt-1 leading-tight">States Delivered</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-display text-2xl text-gold-light stat-num" data-target="820" data-suffix="+">0</span>
+        <span class="text-[9px] tracking-[0.1em] uppercase text-cream/55 mt-1 leading-tight">Orders Fulfilled</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HERO / WELCOME — LAPTOP & UP ============ -->
+<section class="relative w-full overflow-hidden bg-ink text-cream hidden lg:block">
   <div class="absolute -top-24 right-0 w-[560px] h-[560px] bg-gold/10 rounded-full blur-[130px] pointer-events-none"></div>
   <div class="absolute bottom-0 -left-24 w-[420px] h-[420px] bg-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -714,6 +795,39 @@ tailwind.config = {
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // animated stat counters (mobile hero)
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statEls = document.querySelectorAll('.stat-num');
+  function animateCount(el){
+    const target = parseFloat(el.getAttribute('data-target')) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
+    if(reduceMotion){ el.textContent = target + suffix; return; }
+    const duration = 1400;
+    const start = performance.now();
+    function step(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(progress < 1){ requestAnimationFrame(step); }
+    }
+    requestAnimationFrame(step);
+  }
+  if(statEls.length){
+    if('IntersectionObserver' in window){
+      const statIo = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            animateCount(entry.target);
+            statIo.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      statEls.forEach(el => statIo.observe(el));
+    } else {
+      statEls.forEach(el => animateCount(el));
+    }
   }
 
   // contact form -> WhatsApp
