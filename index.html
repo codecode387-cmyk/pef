@@ -40,14 +40,18 @@ tailwind.config = {
     --ink:#0c0c0d;
     --gold:#b8912f;
   }
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     margin:0;
     background:#fbfaf7;
     color:#151412;
     font-family:'Inter', sans-serif;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    max-width:100vw;
   }
+  img{ max-width:100%; height:auto; }
+  * { min-width:0; }
   ::-webkit-scrollbar{width:10px;}
   ::-webkit-scrollbar-track{background:#fbfaf7;}
   ::-webkit-scrollbar-thumb{background:#c9b98a;border-radius:8px;}
@@ -175,7 +179,7 @@ tailwind.config = {
 <!-- ============ HEADER / NAV ============ -->
 <header class="sticky top-0 z-50 w-full bg-paper/90 backdrop-blur-md border-b border-line">
   <div class="max-w-7xl mx-auto px-5 lg:px-12 h-20 flex items-center justify-between gap-4">
-    <a href="#top" class="flex items-center gap-3 group">
+    <a href="home.html" class="flex items-center gap-3 group">
       <div class="w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center text-gold group-hover:bg-ink group-hover:text-gold transition-colors">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">workspace_premium</span>
       </div>
@@ -185,12 +189,14 @@ tailwind.config = {
       </div>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-[13px] tracking-[0.08em] uppercase text-[#3a3733]">
-      <a href="#about" class="hover:text-gold-deep transition-colors">About</a>
-      <a href="#collection" class="hover:text-gold-deep transition-colors">Collection</a>
+    <nav class="hidden md:flex items-center gap-6 text-[13px] tracking-[0.08em] uppercase text-[#3a3733]">
+      <a href="home.html" class="hover:text-gold-deep transition-colors">Home</a>
+      <a href="store.html" class="hover:text-gold-deep transition-colors">Store</a>
+      <a href="wholesale-inquiry.html" class="hover:text-gold-deep transition-colors">Wholesale</a>
+      <a href="about.html" class="hover:text-gold-deep transition-colors">About Us</a>
       <a href="#why-us" class="hover:text-gold-deep transition-colors">Why Us</a>
       <a href="#how-to-order" class="hover:text-gold-deep transition-colors">How to Order</a>
-      <a href="#contact" class="hover:text-gold-deep transition-colors">Contact</a>
+      <a href="contact.html" class="hover:text-gold-deep transition-colors">Contact Us</a>
     </nav>
 
     <a href="https://wa.me/2348038773989" target="_blank" rel="noopener noreferrer"
@@ -206,11 +212,13 @@ tailwind.config = {
 
   <!-- mobile menu -->
   <div id="mobileMenu" class="md:hidden hidden border-t border-line bg-paper px-5 py-4 flex flex-col gap-4 text-sm uppercase tracking-wider text-[#3a3733]">
-    <a href="#about" class="py-1">About</a>
-    <a href="#collection" class="py-1">Collection</a>
+    <a href="home.html" class="py-1">Home</a>
+    <a href="store.html" class="py-1">Store</a>
+    <a href="wholesale-inquiry.html" class="py-1">Wholesale</a>
+    <a href="about.html" class="py-1">About Us</a>
     <a href="#why-us" class="py-1">Why Us</a>
     <a href="#how-to-order" class="py-1">How to Order</a>
-    <a href="#contact" class="py-1">Contact</a>
+    <a href="contact.html" class="py-1">Contact Us</a>
     <a href="https://wa.me/2348038773989" target="_blank" rel="noopener noreferrer" class="btn-gold text-center py-3 rounded-full font-semibold">Chat on WhatsApp</a>
   </div>
 </header>
@@ -229,7 +237,7 @@ tailwind.config = {
         <span>Welcome to Eagles Touch</span>
       </div>
 
-      <h1 class="load-in font-display text-[38px] leading-[1.12] sm:text-[46px] sm:leading-[1.1] lg:text-[58px] lg:leading-[1.08] font-normal" style="animation-delay:.08s;">
+      <h1 class="load-in font-display text-[30px] leading-[1.15] xs:text-[34px] sm:text-[46px] sm:leading-[1.1] lg:text-[58px] lg:leading-[1.08] font-normal break-words" style="animation-delay:.08s;">
         Fragrance, sourced <em class="italic text-gold-light">honestly</em>, delivered with care.
       </h1>
 
@@ -326,8 +334,8 @@ tailwind.config = {
         <span class="text-gold-deep text-[11px] tracking-[0.2em] uppercase">Private Reserve &amp; Wholesale</span>
         <h2 class="font-display text-3xl sm:text-4xl text-ink">Curated Collection</h2>
       </div>
-      <a href="https://wa.me/2348038773989?text=Hello%2C%20please%20send%20me%20the%20full%20catalog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[12px] tracking-[0.1em] uppercase text-gold-deep hover:text-gold transition-colors">
-        View all 150+ fragrances
+      <a href="store.html" class="inline-flex items-center gap-2 text-[12px] tracking-[0.1em] uppercase text-gold-deep hover:text-gold transition-colors">
+        View all 150+ fragrances in store
         <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
       </a>
     </div>
@@ -448,7 +456,7 @@ tailwind.config = {
       <h2 class="font-display text-3xl sm:text-4xl text-ink">How to Order &amp; How It's Delivered</h2>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="reveal flex flex-col gap-3">
         <span class="step-num text-4xl text-gold-light">01</span>
         <h3 class="font-display text-lg text-ink">Message Us</h3>
@@ -640,11 +648,12 @@ tailwind.config = {
 
     <div class="flex flex-col gap-3">
       <span class="font-display text-cream text-base mb-1">Explore</span>
-      <a href="#about" class="text-sm hover:text-gold transition-colors">About Us</a>
-      <a href="#collection" class="text-sm hover:text-gold transition-colors">Collection</a>
-      <a href="#why-us" class="text-sm hover:text-gold transition-colors">Why Choose Us</a>
-      <a href="#how-to-order" class="text-sm hover:text-gold transition-colors">How to Order</a>
-      <a href="#contact" class="text-sm hover:text-gold transition-colors">Contact</a>
+      <a href="home.html" class="text-sm hover:text-gold transition-colors">Home</a>
+      <a href="store.html" class="text-sm hover:text-gold transition-colors">Store</a>
+      <a href="wholesale-inquiry.html" class="text-sm hover:text-gold transition-colors">Wholesale Inquiry</a>
+      <a href="about.html" class="text-sm hover:text-gold transition-colors">About Us</a>
+      <a href="contact.html" class="text-sm hover:text-gold transition-colors">Contact</a>
+      <a href="delivery-info.html" class="text-sm hover:text-gold transition-colors">Delivery Info &amp; Pickup</a>
     </div>
 
     <div class="flex flex-col gap-3">
